@@ -192,6 +192,24 @@ impl<T> VecLinkedList<T> {
             curnode: head.unwrap_or(0),
         }
     }
+    ///
+    pub fn iter_with_start(&self, start: usize) -> VecLinkedListIter<T> {
+        VecLinkedListIter {
+            v: self,
+            curnode: start,
+            amt: 0,
+        }
+    }
+    ///
+    pub fn into_iter_with_start(
+        self,
+        start: usize,
+    ) -> VecLinkedListIntoIter<T> {
+        VecLinkedListIntoIter {
+            v: self,
+            curnode: start,
+        }
+    }
 }
 
 impl<T: std::fmt::Debug> std::fmt::Debug for VecLinkedList<T> {
@@ -296,7 +314,7 @@ mod tests {
         //
         println!("{:?}", v.data);
         //
-        let v: Vec<_> = v.into_iter().collect();
+        let v: Vec<_> = v.into_iter_with_start(3).collect();
         //
         println!("{:?}", v);
     }
