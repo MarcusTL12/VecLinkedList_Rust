@@ -89,6 +89,10 @@ impl<T> VecLinkedList<T> {
         }
     }
     /// Returns the node before `self.head`
+    pub fn head(&self) -> Option<usize> {
+        self.head
+    }
+    /// Returns the node before `self.head`
     pub fn tail(&self) -> Option<usize> {
         self.head.and_then(|i| Some(self.offset(i, -1)))
     }
