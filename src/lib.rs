@@ -162,6 +162,12 @@ impl<T> VecLinkedList<T> {
     }
     /// Removes `node`, returning the value of the node
     pub fn remove(&mut self, node: usize) -> T {
+        if self.len == 1 {
+            self.head = None;
+        } else {
+            self.head = Some(self.get_next_node(node));
+        }
+        //
         self.len -= 1;
         {
             let prev = self.offset(node, -1);
