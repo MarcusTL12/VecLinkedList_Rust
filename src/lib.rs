@@ -94,7 +94,7 @@ impl<T> VecLinkedList<T> {
     }
     ///
     pub fn set_head(&mut self, nhead: usize) {
-        self.head = nhead;
+        self.head = Some(nhead);
     }
     /// Returns the node before `self.head`
     pub fn tail(&self) -> Option<usize> {
