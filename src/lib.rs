@@ -105,8 +105,8 @@ impl<T> VecLinkedList<T> {
         self.len
     }
     ///
-    pub fn nodenr(&self, n: usize) -> Option<usize> {
-        self.head().and_then(|x| Some(self.offset(x, n as isize)))
+    pub fn nodenr(&self, n: isize) -> Option<usize> {
+        self.head().and_then(|x| Some(self.offset(x, n)))
     }
     ///
     pub fn get(&self, node: usize) -> Option<&T> {
