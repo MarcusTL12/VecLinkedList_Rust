@@ -254,16 +254,13 @@ impl<T> VecLinkedList<T> {
     pub fn extend<I: Iterator<Item = T>>(&mut self, it: I) {
         self.extend_at(it, self.tail().unwrap());
     }
-}
-
-impl<T: PartialEq + Eq> VecLinkedList<T> {
     ///
-    pub fn find(&self, val: &T) -> Option<usize> {
+    pub fn find<P: FnMut(&T) -> bool>(&self, mut pred: P) -> Option<usize> {
         let mut curnode = self.head()?;
         //
         for _ in 0..self.len() {
             if let Some(x) = self.get(curnode) {
-                if x == val {
+                if pred(x) {
                     return Some(curnode);
                 }
             }
