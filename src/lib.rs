@@ -176,7 +176,7 @@ impl<T> VecLinkedList<T> {
     pub fn remove(&mut self, node: usize) -> T {
         if self.len == 1 {
             self.head = None;
-        } else {
+        } else if node == self.head().unwrap() {
             self.head = Some(self.get_next_node(node));
         }
         //
