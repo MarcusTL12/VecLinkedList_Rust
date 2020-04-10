@@ -224,6 +224,22 @@ impl<T> VecLinkedList<T> {
             curnode: start,
         }
     }
+    ///
+    pub fn swap(&mut self, node1: usize, node2: usize) {
+        let mut temp1 = self.data[node1].take().unwrap();
+        let mut temp2 = self.data[node2].take().unwrap();
+        //
+        let temp = temp1.1;
+        temp1.1 = temp2.1;
+        temp2.1 = temp;
+        //
+        let temp = temp1.2;
+        temp1.2 = temp2.2;
+        temp2.2 = temp;
+        //
+        self.data[node1] = Some(temp2);
+        self.data[node2] = Some(temp1);
+    }
 }
 
 impl<T: std::fmt::Debug> std::fmt::Debug for VecLinkedList<T> {
