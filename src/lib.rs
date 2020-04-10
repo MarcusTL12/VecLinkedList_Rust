@@ -105,6 +105,10 @@ impl<T> VecLinkedList<T> {
         self.len
     }
     ///
+    pub fn nodenr(&self, n: usize) -> Option<usize> {
+        self.head().and_then(|x| Some(self.offset(x, n as isize)))
+    }
+    ///
     pub fn get(&self, node: usize) -> Option<&T> {
         self.data
             .get(node)
@@ -239,6 +243,34 @@ impl<T> VecLinkedList<T> {
         //
         self.data[node1] = Some(temp2);
         self.data[node2] = Some(temp1);
+    }
+    ///
+    pub fn extend_at<I: Iterator<Item = T>>(&mut self, it: I, mut at: usize) {
+        for v in it {
+            at = self.insert(at, v);
+        }
+    }
+    ///
+    pub fn extend<I: Iterator<Item = T>>(&mut self, it: I) {
+        self.extend_at(it, self.tail().unwrap());
+    }
+}
+
+impl<T: PartialEq + Eq> VecLinkedList<T> {
+    ///
+    pub fn find(&self, val: &T) -> Option<usize> {
+        let mut curnode = self.head()?;
+        //
+        for _ in 0..self.len() {
+            if let Some(x) = self.get(curnode) {
+                if x == val {
+                    return Some(curnode);
+                }
+            }
+            curnode = self.get_next_node(curnode);
+        }
+        //
+        None
     }
 }
 
