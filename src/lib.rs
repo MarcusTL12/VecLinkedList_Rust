@@ -273,11 +273,11 @@ impl<T> VecLinkedList<T> {
 
 impl<T: std::fmt::Debug> std::fmt::Debug for VecLinkedList<T> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "* -> ")?;
+        write!(f, "⋅ → ")?;
         for i in self.iter() {
-            write!(f, "{:?} -> ", i)?;
+            write!(f, "{:?} → ", i)?;
         }
-        write!(f, "*")
+        write!(f, "⋅")
     }
 }
 
